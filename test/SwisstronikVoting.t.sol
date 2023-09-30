@@ -28,7 +28,7 @@ contract SwisstronikVotingTest is Test {
     function setUp() public {
         generateCandidates();
         // assumes msg.sender is owner (ie address(this))
-        voting = new SwisstronikVoting(noOfCandidates, 1 days, cadidatesArray );
+        voting = new SwisstronikVoting(noOfCandidates, 2 days, cadidatesArray );
         Ivoting = ISwisstronikVoting(address(voting));
         generatevotersArray();
         registered = Ivoting.registerNewVoters(registerVotersArray);
@@ -59,7 +59,7 @@ contract SwisstronikVotingTest is Test {
         vm.prank(hacker);
         Ivoting.registerNewVoters(_voters);
     }
-    function testEntireWorkFlow() public {
+    function testEntireWorkFlowandOutputsOwner() public {
         vm.prank(voter1);
         Ivoting.vote(0);
         vm.prank(voter2);
@@ -70,10 +70,19 @@ contract SwisstronikVotingTest is Test {
         Ivoting.vote(1);
         vm.prank(voter5);
         Ivoting.vote(3);
-        vm.warp(block.timestamp + 2 days);
+        vm.warp(block.timestamp + 3 days);
         address winner = Ivoting.setWinner();
         console.log("winner==", winner);
+        uint c = Ivoting.retrieveAllVoteCount();
+        console.log("_votingCounts",c);
         assertTrue(winner != address(0));
     }
+    function testgetVotingStatus() public {
+        (uint a, uint b) = Ivoting.getVotingStatus();
+        console.log("_votingStart==",a);
+        console.log("_votingEnds==",b);
+        assertTrue(b > a);
+    }
 
-}
+
+} 

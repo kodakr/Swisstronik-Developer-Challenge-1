@@ -11,6 +11,8 @@ interface ISwisstronikVoting {
     function getWinner() external view returns(address);
     function getVotingStatus() external view returns (uint _votingStart, uint _votingEnds);
     function getCandidatesMaxIndex() external view returns(uint maxIndex);
+    function retrieveAllVoteCount() external view returns(uint);
+    
      
 
 
