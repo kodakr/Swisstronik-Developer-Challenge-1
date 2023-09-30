@@ -22,6 +22,7 @@ contract SwisstronikVoting is ISwisstronikVoting {
     error votingClosed(uint _votingcloseTime);
     error votingNotEnded(uint _now);
     error winnerAlreadydeclared(address _winner);
+    error zeroCandidate();
 
     mapping (address => bool) private validVoter;
 
@@ -36,6 +37,7 @@ contract SwisstronikVoting is ISwisstronikVoting {
         _;
     }
     constructor(uint _noOfCandidates, uint _voteDuration, address [] memory candidates_addr)  {
+        if (_noOfCandidates == 0) revert zeroCandidate();
         require(candidates_addr.length == _noOfCandidates, "invalid arrayLength");
         require(_voteDuration >= 1 days, "duration too short");
         // setup Candidates
