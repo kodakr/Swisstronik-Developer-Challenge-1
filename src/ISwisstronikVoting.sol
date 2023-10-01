@@ -11,6 +11,7 @@ interface ISwisstronikVoting {
     function transferOwnership( address _newOwner) external returns(bool);
     function vote(uint8 _candidatesIndexOrId)  external returns(bool voted);
     function registerNewVoters(address [] calldata _voters) external returns(bool);
+    //function registerCandidates(address [] memory candidates_addr) external returns(bool);
     function getVotingStatus() external view returns (uint _votingStart, uint _votingEnds);
     
     

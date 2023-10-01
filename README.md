@@ -1,4 +1,9 @@
-# Swisstronik-Developer-Challenge-1
+# Swisstronik-Developer-Challenge-1 
+## Deployed Contract address(Swisstronik testnet)
+```
+0x398cc565cb9cb55a4718d6e5b7924c151193b9b1
+```
+
 
 ## TestFile Output
 ```
